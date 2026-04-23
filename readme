@@ -1,3 +1,7 @@
+**Push**
 git add .
-git commit -m "τι άλλαξες"
+git commit -m "update"
 git push
+
+**Pull""
+git pull

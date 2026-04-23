@@ -4,11 +4,10 @@ from flask_cors import CORS
 from bson.objectid import ObjectId
 
 app = Flask(__name__)
+CORS(app)
 
 app.config["MONGO_URI"] = "mongodb://localhost:27017/tripadvisor_db"
-
 mongo = PyMongo(app)
-CORS(app)
 
 
 def serialize_item(item):
@@ -19,7 +18,8 @@ def serialize_item(item):
         "description": item.get("description", ""),
         "likes": item.get("likes", 0),
         "category": item.get("category", ""),
-        "risk_level": item.get("risk_level", "")
+        "risk_level": item.get("risk_level", ""),
+        "side_effects": item.get("side_effects", "")
     }
 
 
@@ -29,25 +29,25 @@ def home():
 
 
 @app.route("/search", methods=["GET"])
-def search_items():
+def search():
     name = request.args.get("name", "").strip()
-    collection = mongo.db.items
 
     if name == "":
-        results = list(collection.find())
+        results = list(mongo.db.items.find().sort("likes", -1))
     else:
-        exact_match = list(collection.find({"name": {"$regex": f"^{name}$", "$options": "i"}}))
+        exact_match = list(mongo.db.items.find({
+            "name": {"$regex": f"^{name}$", "$options": "i"}
+        }))
 
-        if len(exact_match) > 0:
+        if exact_match:
             results = exact_match
         else:
-            results = list(
-                collection.find(
-                    {"name": {"$regex": name, "$options": "i"}}
-                ).sort("likes", -1)
-            )
+            results = list(mongo.db.items.find({
+                "name": {"$regex": name, "$options": "i"}
+            }).sort("likes", -1))
 
-    return jsonify([serialize_item(item) for item in results])
+    serialized_results = [serialize_item(item) for item in results]
+    return jsonify(serialized_results)
 
 
 @app.route("/like", methods=["POST"])
@@ -60,15 +60,16 @@ def like_item():
     item_id = data["id"]
 
     try:
-        result = mongo.db.items.update_one(
+        mongo.db.items.update_one(
             {"_id": ObjectId(item_id)},
             {"$inc": {"likes": 1}}
         )
 
-        if result.matched_count == 0:
+        updated_item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
+
+        if updated_item is None:
             return jsonify({"error": "Item not found"}), 404
 
-        updated_item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
         return jsonify(serialize_item(updated_item))
 
     except Exception:
@@ -77,10 +78,9 @@ def like_item():
 
 @app.route("/popular", methods=["GET"])
 def popular_items():
-    results = list(
-        mongo.db.items.find().sort("likes", -1).limit(5)
-    )
-    return jsonify([serialize_item(item) for item in results])
+    results = list(mongo.db.items.find().sort("likes", -1).limit(5))
+    serialized_results = [serialize_item(item) for item in results]
+    return jsonify(serialized_results)
 
 
 if __name__ == "__main__":

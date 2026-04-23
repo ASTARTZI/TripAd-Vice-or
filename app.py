@@ -46,6 +46,8 @@ def search():
                 "name": {"$regex": name, "$options": "i"}
             }).sort("likes", -1))
 
+    print("RESULTS FROM DB:", results)
+
     serialized_results = [serialize_item(item) for item in results]
     return jsonify(serialized_results)
 

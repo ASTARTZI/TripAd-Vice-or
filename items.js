@@ -18,11 +18,24 @@ function createCard(item) {
 
 async function loadItems(searchTerm = "") {
     const container = document.getElementById("items-container");
-    if (!container) return;
+    console.log("loadItems called");
+    console.log("Container found:", container);
+    console.log("Search term:", searchTerm);
+
+    if (!container) {
+        console.log("items-container was not found in HTML");
+        return;
+    }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/search?name=${encodeURIComponent(searchTerm)}`);
+        const url = `${API_BASE_URL}/search?name=${encodeURIComponent(searchTerm)}`;
+        console.log("Fetching from:", url);
+
+        const response = await fetch(url);
+        console.log("Response status:", response.status);
+
         const items = await response.json();
+        console.log("Items from API:", items);
 
         container.innerHTML = "";
 
@@ -35,8 +48,8 @@ async function loadItems(searchTerm = "") {
             container.innerHTML += createCard(item);
         });
     } catch (error) {
+        console.error("Error inside loadItems:", error);
         container.innerHTML = "<p>Error loading items.</p>";
-        console.error(error);
     }
 }
 
@@ -55,36 +68,20 @@ async function likeItem(itemId) {
         const searchInput = document.getElementById("search-input");
         if (searchInput) {
             loadItems(searchInput.value);
-        } else {
-            loadPopularItems();
         }
     } catch (error) {
         console.error("Error liking item:", error);
     }
 }
 
-async function loadPopularItems() {
-    const container = document.getElementById("popular-container");
-    if (!container) return;
-
-    try {
-        const response = await fetch(`${API_BASE_URL}/popular`);
-        const items = await response.json();
-
-        container.innerHTML = "";
-
-        items.forEach(item => {
-            container.innerHTML += createCard(item);
-        });
-    } catch (error) {
-        container.innerHTML = "<p>Error loading popular items.</p>";
-        console.error(error);
-    }
-}
-
 document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM fully loaded");
+
     const searchButton = document.getElementById("search-button");
     const searchInput = document.getElementById("search-input");
+
+    console.log("Search button:", searchButton);
+    console.log("Search input:", searchInput);
 
     if (searchButton && searchInput) {
         loadItems();
@@ -98,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadItems(searchInput.value);
             }
         });
+    } else {
+        console.log("Search button or input not found");
     }
-
-    loadPopularItems();
 });

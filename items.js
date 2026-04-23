@@ -1,3 +1,5 @@
+console.log("items.js loaded successfully");
+
 const API_BASE_URL = "http://127.0.0.1:5000";
 
 function createCard(item) {
@@ -18,28 +20,17 @@ function createCard(item) {
 
 async function loadItems(searchTerm = "") {
     const container = document.getElementById("items-container");
-    console.log("loadItems called");
-    console.log("Container found:", container);
-    console.log("Search term:", searchTerm);
-
-    if (!container) {
-        console.log("items-container was not found in HTML");
-        return;
-    }
+    if (!container) return;
 
     try {
-        const url = `${API_BASE_URL}/search?name=${encodeURIComponent(searchTerm)}`;
-        console.log("Fetching from:", url);
-
-        const response = await fetch(url);
-        console.log("Response status:", response.status);
-
+        const response = await fetch(`${API_BASE_URL}/search?name=${encodeURIComponent(searchTerm)}`);
         const items = await response.json();
+
         console.log("Items from API:", items);
 
         container.innerHTML = "";
 
-        if (items.length === 0) {
+        if (!items || items.length === 0) {
             container.innerHTML = "<p>No bad habits found.</p>";
             return;
         }
@@ -48,7 +39,7 @@ async function loadItems(searchTerm = "") {
             container.innerHTML += createCard(item);
         });
     } catch (error) {
-        console.error("Error inside loadItems:", error);
+        console.error("Error loading items:", error);
         container.innerHTML = "<p>Error loading items.</p>";
     }
 }
@@ -68,9 +59,37 @@ async function likeItem(itemId) {
         const searchInput = document.getElementById("search-input");
         if (searchInput) {
             loadItems(searchInput.value);
+        } else {
+            loadPopularItems();
         }
     } catch (error) {
         console.error("Error liking item:", error);
+    }
+}
+
+async function loadPopularItems() {
+    const container = document.getElementById("popular-container");
+    if (!container) return;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/popular`);
+        const items = await response.json();
+
+        console.log("Popular items:", items);
+
+        container.innerHTML = "";
+
+        if (!items || items.length === 0) {
+            container.innerHTML = "<p>No popular items found.</p>";
+            return;
+        }
+
+        items.forEach(item => {
+            container.innerHTML += createCard(item);
+        });
+    } catch (error) {
+        console.error("Error loading popular items:", error);
+        container.innerHTML = "<p>Error loading popular items.</p>";
     }
 }
 
@@ -79,9 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const searchButton = document.getElementById("search-button");
     const searchInput = document.getElementById("search-input");
-
-    console.log("Search button:", searchButton);
-    console.log("Search input:", searchInput);
 
     if (searchButton && searchInput) {
         loadItems();
@@ -95,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadItems(searchInput.value);
             }
         });
-    } else {
-        console.log("Search button or input not found");
     }
+
+    loadPopularItems();
 });

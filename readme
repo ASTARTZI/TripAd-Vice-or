@@ -5,3 +5,6 @@ git push
 
 **Pull""
 git pull
+
+
+.\venv\Scripts\python.exe app.py

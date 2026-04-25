@@ -31,22 +31,17 @@ def home():
 @app.route("/search", methods=["GET"])
 def search():
     name = request.args.get("name", "").strip()
+    category = request.args.get("category", "").strip()
 
-    if name == "":
-        results = list(mongo.db.items.find().sort("likes", -1))
-    else:
-        exact_match = list(mongo.db.items.find({
-            "name": {"$regex": f"^{name}$", "$options": "i"}
-        }))
+    query = {}
 
-        if exact_match:
-            results = exact_match
-        else:
-            results = list(mongo.db.items.find({
-                "name": {"$regex": name, "$options": "i"}
-            }).sort("likes", -1))
+    if name != "":
+        query["name"] = {"$regex": name, "$options": "i"}
 
-    print("RESULTS FROM DB:", results)
+    if category != "":
+        query["category"] = category
+
+    results = list(mongo.db.items.find(query).sort("likes", -1))
 
     serialized_results = [serialize_item(item) for item in results]
     return jsonify(serialized_results)

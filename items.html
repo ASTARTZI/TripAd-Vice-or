@@ -20,9 +20,20 @@
             <h1>Explore Bad Habits</h1>
 
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Search for a bad habit...">
-                <button id="search-button">Search</button>
-            </div>
+    <input type="text" id="search-input" placeholder="Search for a bad habit...">
+    
+    <select id="category-filter">
+        <option value="">All</option>
+        <option value="Health">Health</option>
+        <option value="Sleep">Sleep</option>
+        <option value="Food">Food</option>
+        <option value="Productivity">Productivity</option>
+        <option value="Technology">Technology</option>
+        <option value="Addiction">Addiction</option>
+    </select>
+
+    <button id="search-button">Search</button>
+</div>
 
             <div id="items-container" class="card-grid"></div>
         </section>

@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 
-body {
+/*body {
     font-family: Arial, sans-serif;
     background-color: #111827;
     color: #f9fafb;
     line-height: 1.6;
-}
+}*/
 
 header {
     background-color: #111827;
@@ -33,6 +33,24 @@ nav {
     letter-spacing: 0.5px;
     text-shadow: 2px 2px 6px rgba(75, 23, 3, 0.35);
 }
+
+/*Προσθήκη για σταθερό footer*/
+html, body{
+    height:100%;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+
+    font-family: Arial, sans-serif;
+    background-color:#111827;
+    color:#f9fafb;
+    line-height:1.6;
+}
+
+
 
 nav a {
     color: white;
@@ -101,23 +119,18 @@ nav a:hover {
 
 
 
-/*.card {
-    background-color: #1f2937;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-    transition: transform 0.2s ease;
-}
-Το παραπάνω έχει αντικατασταθεί με το ακριβώς από κάτω στην προσπάθεια μου να φτιάξω το κουμπί αλλά θα το δω (δεν αλλάξε και κάτι)*/
+
 .card {
     background-color: #1f2937;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
 
     display: flex;
     flex-direction: column;
+    height: 100%;   /* σημαντικό */
 }
+
 .card:hover {
     transform: translateY(-4px);
 }
@@ -149,18 +162,17 @@ gap:24px;
     margin-bottom: 8px;
     color: #d1d5db;
 }
-/*Δες το για την τοποθεσία του "Bad Idea"
-.card-content {
-    flex: 1;
+.card-content{
+    padding:15px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
 }
 
 .like-button {
     margin-top: auto;
-}*/
-
-.like-button {
-    margin-bottom: auto;
     padding: 10px 14px;
+    width: 100px;
     border: none;
     background-color: #dc2626;
     color: white;
@@ -183,7 +195,7 @@ footer {
     text-align: center;
     background-color: #1f2937;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 0px;
     border-top: 2px solid #374151;
 }
 

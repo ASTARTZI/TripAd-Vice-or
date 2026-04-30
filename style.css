@@ -50,7 +50,9 @@ body{
     line-height:1.6;
 }
 
-
+main{
+    flex:1;
+}
 
 nav a {
     color: white;
@@ -62,6 +64,8 @@ nav a {
 nav a:hover {
     color: #f97316;
 }
+
+
 
 .hero {
     text-align: center;
@@ -77,6 +81,7 @@ nav a:hover {
 .hero p {
     font-size: 1.2rem;
     color: #e5e7eb;
+    /*font-family: εδώ μήπως να αλλάξουμε την γραμματοσειρά?*/
 }
 
 .section {
@@ -116,8 +121,6 @@ nav a:hover {
 .search-bar button:hover {
     background-color: #ea580c;
 }
-
-
 
 
 .card {
@@ -233,12 +236,7 @@ footer {
     height: 200px;
     object-fit: cover;
 }
-.card {
-    background-color: #1f2937;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.3s;
-}
+
 
 .card:hover {
     transform: scale(1.03);

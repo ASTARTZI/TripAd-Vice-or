@@ -102,11 +102,14 @@ footer {
     margin-bottom: 30px;
 }
 
+.search-bar select{
+ border-radius: 18px;
+}
 .search-bar input {
     flex: 1; /*κάνει το input να πιάνει όλο τον διαθέσιμο χώρο*/
     padding: 10px;
     border: none;
-    border-radius: 8px; /*για να μην έχει γωνίες το search bar*/
+    border-radius: 18px; /*για να μην έχει γωνίες το search bar*/
     font-size: 1rem;
 }
 
@@ -115,7 +118,7 @@ footer {
     border: none;
     background-color: #04c74e;
     color: white;
-    border-radius: 8px; /*για "κυρτή" γωνία στο κουμπί*/
+    border-radius: 18px; /*για "κυρτή" γωνία στο κουμπί*/
     cursor: pointer; /*αλλάζει την εμφάνιση του κερσορα όταν περνάει πάνω από το κουμπί*/
     font-weight: bold;
 }
@@ -214,7 +217,6 @@ gap:24px;
 .hero-button:hover {
     background-color: #068313;
 }
-
 
 
 .section-intro {

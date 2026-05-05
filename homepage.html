@@ -38,7 +38,13 @@
                 These are the most popular bad habits according to our users.
             </p>
 
-            <div id="popular-container" class="card-grid"></div> <!--Εδώ μπαίνει το δυναμικό περιεχόμενο από το Flask-->
+            <div class="slideshow-container">
+    <button class="slide-btn" id="prev-slide">❮</button>
+
+    <div id="popular-container" class="slideshow"></div>
+
+    <button class="slide-btn" id="next-slide">❯</button>
+    </div> <!--Εδώ μπαίνει το δυναμικό περιεχόμενο από το Flask-->
         </section>
         
 
@@ -64,7 +70,7 @@
     </main>
 
     <footer> <!-- το footer της σελίδας -->
-        <p>TripAd-Vice-or | Web Information Systems Project 2026</p>
+        <p>TripAd-Vice-or | Web Information Systems Project 2026 ©</p>
     </footer>
 
     <script src="items.js"></script> <!--Σύνδεση με javascript-->

@@ -97,6 +97,9 @@ async function likeItem(itemId) {
     }
 }
 
+let currentSlide = 0;
+let popularItems = [];
+
 async function loadPopularItems() {
     const container = document.getElementById("popular-container");
 
@@ -108,23 +111,63 @@ async function loadPopularItems() {
         container.innerHTML = "<p>Loading popular bad habits...</p>";
 
         const response = await fetch(`${API_BASE_URL}/popular`);
-        const items = await response.json();
+        popularItems = await response.json();
 
         container.innerHTML = "";
 
-        if (!items || items.length === 0) {
+        if (!popularItems || popularItems.length === 0) {
             container.innerHTML = "<p>No popular bad habits found.</p>";
             return;
         }
 
-        items.forEach(item => {
-            container.innerHTML += createCard(item);
-        });
+        currentSlide = 0;
+        showSlide(currentSlide);
+
+        const prevButton = document.getElementById("prev-slide");
+        const nextButton = document.getElementById("next-slide");
+
+        if (prevButton && nextButton) {
+            prevButton.onclick = () => {
+                currentSlide = (currentSlide - 1 + popularItems.length) % popularItems.length;
+                showSlide(currentSlide);
+            };
+
+            nextButton.onclick = () => {
+                currentSlide = (currentSlide + 1) % popularItems.length;
+                showSlide(currentSlide);
+            };
+        }
 
     } catch (error) {
         console.error("Error loading popular items:", error);
         container.innerHTML = "<p>Error loading popular items.</p>";
     }
+}
+
+function showSlide(index) {
+    const container = document.getElementById("popular-container");
+
+    if (!container || popularItems.length === 0) {
+        return;
+    }
+
+    const item = popularItems[index];
+
+    container.innerHTML = `
+        <div class="slide-card">
+            <img src="${item.image}" alt="${item.name}" onclick="likeItem('${item._id}')">
+
+            <div class="slide-content">
+                <h3>${item.name}</h3>
+                <p>${item.description}</p>
+                <p><strong>Likes:</strong> <span id="likes-${item._id}">${item.likes}</span></p>
+
+                <button class="like-button" onclick="likeItem('${item._id}')">
+                    Bad Idea
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 document.addEventListener("DOMContentLoaded", () => {

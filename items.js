@@ -142,6 +142,11 @@ async function loadPopularItems() {
         console.error("Error loading popular items:", error);
         container.innerHTML = "<p>Error loading popular items.</p>";
     }
+
+    setInterval(() => {
+    currentSlide = (currentSlide + 1) % popularItems.length;
+    showSlide(currentSlide);
+}, 5000);
 }
 
 function showSlide(index) {

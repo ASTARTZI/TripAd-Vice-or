@@ -11,10 +11,9 @@ header {
     display: flex;                /* Ενεργοποιεί το flexbox */
     justify-content: space-between; /* Σπρώχνει το logo αριστερά και το nav δεξιά */
     align-items: center;          /* Τα ευθυγραμμίζει τέλεια στην ίδια γραμμή */
-    padding: 15px 40px; /*padding για το logo κλπ*/
+    padding: 15px 15px; /*padding για το logo κλπ*/
     border-bottom:1px solid #374151;
 }
-
 
 nav {
     display: flex;

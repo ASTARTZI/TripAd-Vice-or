@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_pymongo import PyMongo
 from flask_cors import CORS
 from bson.objectid import ObjectId
@@ -25,7 +25,12 @@ def serialize_item(item):
 
 @app.route("/")
 def home():
+    return render_template('homepage.html')
     return "TripAd-Vice-or API is running!"
+
+@app.route('/items')
+def items():
+    return render_template('items.html')
 
 
 @app.route("/search", methods=["GET"])

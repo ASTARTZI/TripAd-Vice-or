@@ -36,10 +36,11 @@ body{
     display:flex;
     flex-direction:column;
 
-    font-family: Arial, sans-serif;
+    font-family: Times New Roman;
     background-color:#111827;
     color:#f9fafb;
     line-height:1.6;
+    font-size: 1.2rem;
 }
 
 
@@ -361,5 +362,5 @@ gap:24px;
 
 .slideshow-hint {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }

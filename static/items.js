@@ -151,18 +151,6 @@ async function likeItem(itemId) {
             likesElement.textContent = updatedItem.likes;
         }
 
-        const searchInput =
-            document.getElementById("search-input");
-
-        if (searchInput) {
-
-            loadItems(searchInput.value);
-
-        } else {
-
-            loadPopularItems();
-        }
-
     } catch (error) {
 
         console.error("Error liking item:", error);
@@ -179,7 +167,48 @@ let popularItems = [];
 
 let expandedSlide = false;
 
-let slideshowInterval;
+let slideshowInterval = null;
+
+let lockedSlideIndex = null;
+
+// =========================
+// START SLIDESHOW
+// =========================
+
+function startSlideshow() {
+
+    stopSlideshow();
+
+    slideshowInterval = setInterval(() => {
+
+        // Αν είναι ανοιχτές οι πληροφορίες,
+        // ΜΗΝ αλλάζεις slide
+        if (expandedSlide) {
+            return;
+        }
+
+        currentSlide =
+            (currentSlide + 1)
+            % popularItems.length;
+
+        showSlide(currentSlide);
+
+    }, 5000);
+}
+
+// =========================
+// STOP SLIDESHOW
+// =========================
+
+function stopSlideshow() {
+
+    if (slideshowInterval !== null) {
+
+        clearInterval(slideshowInterval);
+
+        slideshowInterval = null;
+    }
+}
 
 // =========================
 // LOAD POPULAR ITEMS
@@ -218,7 +247,11 @@ async function loadPopularItems() {
 
         expandedSlide = false;
 
+        lockedSlideIndex = null;
+
         showSlide(currentSlide);
+
+        startSlideshow();
 
         const prevButton =
             document.getElementById("prev-slide");
@@ -226,28 +259,39 @@ async function loadPopularItems() {
         const nextButton =
             document.getElementById("next-slide");
 
-        if (prevButton && nextButton) {
+        if (prevButton) {
 
             prevButton.onclick = () => {
 
                 expandedSlide = false;
+
+                lockedSlideIndex = null;
 
                 currentSlide =
                     (currentSlide - 1 + popularItems.length)
                     % popularItems.length;
 
                 showSlide(currentSlide);
+
+                startSlideshow();
             };
+        }
+
+        if (nextButton) {
 
             nextButton.onclick = () => {
 
                 expandedSlide = false;
+
+                lockedSlideIndex = null;
 
                 currentSlide =
                     (currentSlide + 1)
                     % popularItems.length;
 
                 showSlide(currentSlide);
+
+                startSlideshow();
             };
         }
 
@@ -261,38 +305,6 @@ async function loadPopularItems() {
         container.innerHTML =
             "<p>Error loading popular items.</p>";
     }
-
-    // =========================
-    // FIX MULTIPLE INTERVALS
-    // =========================
-
-    if (slideshowInterval) {
-        clearInterval(slideshowInterval);
-    }
-
-    if (popularItems.length > 0) {
-
-        slideshowInterval = setInterval(() => {
-
-            expandedSlide = false;
-
-            currentSlide =
-                (currentSlide + 1)
-                % popularItems.length;
-
-            showSlide(currentSlide);
-
-        }, 5000);
-    }
-    let isPaused = false;
-    let interval = setInterval(nextSlide, 5000);
-
-    document.addEventListener("click", function (e) {
-    if (e.target.closest(".card")) {
-        isPaused = true;
-        clearInterval(interval);
-    }
-});
 }
 
 // =========================
@@ -305,6 +317,21 @@ function showSlide(index) {
         document.getElementById("popular-container");
 
     if (!container || popularItems.length === 0) {
+        return;
+    }
+
+    // =========================
+    // LOCK SLIDE WHEN EXPANDED
+    // =========================
+
+    if (
+        expandedSlide &&
+        lockedSlideIndex !== null &&
+        index !== lockedSlideIndex
+    ) {
+
+        currentSlide = lockedSlideIndex;
+
         return;
     }
 
@@ -382,6 +409,33 @@ function toggleSlideDetails() {
 
     expandedSlide = !expandedSlide;
 
+    // =========================
+    // OPEN DETAILS
+    // =========================
+
+    if (expandedSlide) {
+
+        lockedSlideIndex = currentSlide;
+
+        stopSlideshow();
+
+    } else {
+
+        // =========================
+        // CLOSE DETAILS
+        // =========================
+
+        currentSlide = lockedSlideIndex;
+
+        lockedSlideIndex = null;
+
+        showSlide(currentSlide);
+
+        startSlideshow();
+
+        return;
+    }
+
     showSlide(currentSlide);
 }
 
@@ -420,13 +474,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadItems(searchInput.value);
             }
         });
-
-        // OPTIONAL LIVE SEARCH
-        /*
-        searchInput.addEventListener("input", () => {
-            loadItems(searchInput.value);
-        });
-        */
 
         if (categoryFilter) {
 

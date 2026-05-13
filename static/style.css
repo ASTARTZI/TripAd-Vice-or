@@ -1,366 +1,345 @@
 * {
-    margin: 0; /*Αφαίρεση των default εξωτερικών κενών*/
-    padding: 0; /*Αφαίρεση των default εσωτερικών κενών*/
-    box-sizing: border-box; /*Για σωστή εμφάνιση, σε σχεση με τα μεγέθη των elements*/
+    margin: 0; /* Αφαίρεση των default εξωτερικών κενών */
+    padding: 0; /* Αφαίρεση των default εσωτερικών κενών */
+    box-sizing: border-box; /* Υπολογίζει σωστά τα μεγέθη των elements */
 }
 
-
-
 header {
-    background-color: #111827;
-    display: flex;                /* Ενεργοποιεί το flexbox */
-    justify-content: space-between; /* Σπρώχνει το logo αριστερά και το nav δεξιά */
-    align-items: center;          /* Τα ευθυγραμμίζει τέλεια στην ίδια γραμμή */
-    padding: 15px 15px; /*padding για το logo κλπ*/
-    border-bottom:1px solid #374151;
+    background-color: #111827; /* Σκούρο φόντο για το header */
+    display: flex; /* Ενεργοποιεί το flexbox */
+    justify-content: space-between; /* Βάζει logo αριστερά και nav δεξιά */
+    align-items: center; /* Ευθυγραμμίζει τα στοιχεία κάθετα */
+    padding: 15px 15px; /* Εσωτερικό κενό στο header */
+    border-bottom: 1px solid #374151; /* Γραμμή κάτω από το header */
 }
 
 nav {
-    display: flex;
-    align-items: center;
-} /* Για να εμφανίζονται σωστά τα Links και σε διαφορετικούς browsers */
-
-
-/*Προσθήκη για να μένει σταθερό footer ακόμα και όταν η σελίδα έχει λίγο περιεχόμενο*/
-html, body{
-    height:100%;
+    display: flex; /* Τα links εμφανίζονται σε σειρά */
+    align-items: center; /* Κάθετη ευθυγράμμιση των links */
 }
 
-main{
-    flex:1;
-}
-/* το main μεγαλώνει και "σπρώχνει" το footer κάτω*/
-
-body{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-
-    font-family: Times New Roman;
-    background-color:#111827;
-    color:#f9fafb;
-    line-height:1.6;
-    font-size: 1.2rem;
+html, body {
+    height: 100%; /* Κάνει τη σελίδα να πιάνει όλο το ύψος */
 }
 
+main {
+    flex: 1; /* Το main μεγαλώνει και σπρώχνει το footer κάτω */
+}
 
-/*Navigational Links*/
+body {
+    min-height: 100vh; /* Ελάχιστο ύψος όσο η οθόνη */
+    display: flex; /* Χρήση flex για τη διάταξη */
+    flex-direction: column; /* Στοιχίζει header, main, footer κάθετα */
+    font-family: Times New Roman; /* Γραμματοσειρά */
+    background-color: #111827; /* Σκούρο φόντο σελίδας */
+    color: #f9fafb; /* Ανοιχτό χρώμα κειμένου */
+    line-height: 1.6; /* Απόσταση ανάμεσα στις γραμμές */
+    font-size: 1.2rem; /* Βασικό μέγεθος γραμματοσειράς */
+}
+
 nav a {
-    color: white;
-    text-decoration: none; /*αφαιρεί την υπογράμμιση*/
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 1.2rem;
+    color: white; /* Χρώμα links */
+    text-decoration: none; /* Αφαιρεί την υπογράμμιση */
+    margin-left: 20px; /* Απόσταση ανάμεσα στα links */
+    font-weight: bold; /* Έντονη γραφή */
+    font-size: 1.2rem; /* Μέγεθος links */
 }
 
-/*Hover effect*/
 nav a:hover {
-    color: #00eb5b; /* όταν περνάει από πάω το ποντίκι αλλάζει χρώμα*/
+    color: #00eb5b; /* Αλλαγή χρώματος στο hover */
 }
-
 
 footer {
-    text-align: center;
-    background-color: #1f2937;
-    padding: 20px;
-    margin-top: 0px;
-    border-top: 2px solid #374151;
+    text-align: center; /* Κεντράρει το κείμενο */
+    background-color: #1f2937; /* Φόντο footer */
+    padding: 20px; /* Εσωτερικό κενό */
+    margin-top: 0px; /* Χωρίς εξωτερικό κενό από πάνω */
+    border-top: 2px solid #374151; /* Γραμμή πάνω από το footer */
 }
 
 .hero {
-    text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(130deg, #111827, #4F0E8C, #00eb5b);
-    /*για λίγο πιο simple gradient βάζουμε απλά 2 χρώματα ξερω γω*/
+    text-align: center; /* Κεντράρει το περιεχόμενο */
+    padding: 50px 20px; /* Κενό πάνω/κάτω και δεξιά/αριστερά */
+    background: linear-gradient(130deg, #111827, #4F0E8C, #00eb5b); /* Gradient φόντο */
 }
 
 .hero h1 {
-    font-size: 4rem; /*rem = το μέγεθος της βασικής γραμματοσειράς*/
-    margin-bottom: 10px; /*η απόσταση του TripAd-Vice-Or από τα παρακάτω*/
+    font-size: 4rem; /* Μεγάλος τίτλος */
+    margin-bottom: 10px; /* Απόσταση από το κείμενο από κάτω */
 }
 
 .hero p {
-    font-size: 1.2rem;
-    color: #e5e7eb;
-    /*font-family: εδώ μήπως να αλλάξουμε την γραμματοσειρά?*/
+    font-size: 1.2rem; /* Μέγεθος κειμένου */
+    color: #e5e7eb; /* Ανοιχτό γκρι χρώμα */
 }
 
 .section {
-    padding: 30px 20px;
-} /*Για να υπάρχει κενό ανάμεσα στα sections και για την απόσταση στο πλάι*/
+    padding: 30px 20px; /* Κενό μέσα σε κάθε section */
+}
 
-/*Για τα headers των section του homepage & items */
 .section h2,
 .section h1 {
-    margin-bottom: 20px;
-    color: #00eb5b;
+    margin-bottom: 20px; /* Απόσταση τίτλου από το υπόλοιπο περιεχόμενο */
+    color: #00eb5b; /* Πράσινο χρώμα τίτλων */
 }
 
 .search-bar {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
+    display: flex; /* Βάζει input, select και button στην ίδια γραμμή */
+    gap: 10px; /* Απόσταση ανάμεσα στα στοιχεία */
+    margin-bottom: 30px; /* Απόσταση από τα cards */
 }
 
-.search-bar select{
- border-radius: 18px;
+.search-bar select {
+    border-radius: 18px; /* Στρογγυλεμένες γωνίες */
 }
+
 .search-bar input {
-    flex: 1; /*κάνει το input να πιάνει όλο τον διαθέσιμο χώρο*/
-    padding: 10px;
-    border: none;
-    border-radius: 18px; /*για να μην έχει γωνίες το search bar*/
-    font-size: 1rem;
+    flex: 1; /* Το input πιάνει τον διαθέσιμο χώρο */
+    padding: 10px; /* Εσωτερικό κενό */
+    border: none; /* Αφαιρεί το περίγραμμα */
+    border-radius: 18px; /* Στρογγυλεμένες γωνίες */
+    font-size: 1rem; /* Μέγεθος γραμματοσειράς */
 }
 
 .search-bar button {
-    padding: 12px 20px; /*το μέγεθος του κουμπιού search*/
-    border: none;
-    background-color: #04c74e;
-    color: white;
-    border-radius: 18px; /*για "κυρτή" γωνία στο κουμπί*/
-    cursor: pointer; /*αλλάζει την εμφάνιση του κερσορα όταν περνάει πάνω από το κουμπί*/
-    font-weight: bold;
+    padding: 12px 20px; /* Μέγεθος κουμπιού */
+    border: none; /* Χωρίς περίγραμμα */
+    background-color: #04c74e; /* Πράσινο φόντο */
+    color: white; /* Λευκό κείμενο */
+    border-radius: 18px; /* Στρογγυλεμένες γωνίες */
+    cursor: pointer; /* Δείχνει ότι είναι clickable */
+    font-weight: bold; /* Έντονο κείμενο */
 }
 
-/*αλλαγή χρώματος όταν γίνεται hover πάνω από το κουμπί*/
 .search-bar button:hover {
-    background-color: #068313;
+    background-color: #068313; /* Πιο σκούρο πράσινο στο hover */
 }
 
-/*Οι κάρτες/ποστ που εμφανίζονται*/
 .card {
-    background-color: #1f2937;
-    border-radius: 12px;
-    overflow: hidden; /* Για να εμφανίζονται σωστά οι εικόνες μέσα στις κάρτες*/
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-
-    display: flex;
-    flex-direction: column; 
-    /*για να έχουν όλα τα cards ίδιο ύψος*/
-    height: 100%;    /*σημαντικό για να μένει το "like" σταθερά στο κάτω μέρος της κάρτας*/
+    background-color: #1f2937; /* Φόντο κάρτας */
+    border-radius: 12px; /* Στρογγυλεμένες γωνίες */
+    overflow: hidden; /* Κρατά την εικόνα μέσα στην κάρτα */
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25); /* Σκιά κάρτας */
+    display: flex; /* Χρήση flexbox */
+    flex-direction: column; /* Κάθετη διάταξη περιεχομένου */
+    height: 100%; /* Ίδιο ύψος στις κάρτες */
 }
 
 .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-4px); /* Η κάρτα ανεβαίνει λίγο στο hover */
 }
 
-.card-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-/*auto-fit --> ο browser αποφασίζει πόσες κάρτες χωράνε.
-minmax(200px,1fr) --> κάθε κάρτα πιανει min 200px, αλλιώς μοιράζεται ισότιμα στον χώρο*/
-align-items:stretch;
-gap:24px;
+.card-grid {
+    display: grid; /* Εμφάνιση cards σε grid */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive στήλες */
+    align-items: stretch; /* Ίσο ύψος στα cards */
+    gap: 24px; /* Απόσταση ανάμεσα στα cards */
 }
 
 .card img {
-    width: 100%;
-    height: 200px;
-    object-fit:cover;
-    /*cursor: pointer;  Αχρείαστο μου φαίνεται αυτό*/
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος */
+    height: 200px; /* Σταθερό ύψος εικόνας */
+    object-fit: cover; /* Κόβει σωστά την εικόνα χωρίς παραμόρφωση */
 }
 
 .card-content {
-    padding:15px; /*το padding για το κύριο κείμενο που έχει η κάρτα*/
-    flex:1;
-    display:flex;
-    flex-direction:column; /*για κάθετη στοίχιση των h3, p & button*/
+    padding: 15px; /* Κενό μέσα στο περιεχόμενο */
+    flex: 1; /* Πιάνει τον διαθέσιμο χώρο */
+    display: flex; /* Χρήση flexbox */
+    flex-direction: column; /* Κάθετη διάταξη */
 }
 
-.card-content h3 {  /*Για τους τίτλους των bad habit*/
-    margin-bottom: 10px; /*το κενό που έχει ο τίτλος με το υπόλοιπο κείμενο*/
-    color: #fbfbf9;
+.card-content h3 {
+    margin-bottom: 10px; /* Απόσταση τίτλου από το κείμενο */
+    color: #fbfbf9; /* Χρώμα τίτλου */
 }
 
 .card-content p {
-    margin-bottom: 8px;
-    color: #d1d5db;
+    margin-bottom: 8px; /* Απόσταση ανάμεσα στις παραγράφους */
+    color: #d1d5db; /* Γκρι χρώμα κειμένου */
 }
 
-
 .like-button {
-    margin-top: auto; /*με αυτό εξασφαλίζεται ότι το κουμπί θα είναι κάτω σε όλες τις κάρτες*/
-    padding: 10px 14px;
-    width: 90px;
-    border: none;
-    background-color: #04c74e;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+    margin-top: auto; /* Σπρώχνει το κουμπί στο κάτω μέρος */
+    padding: 10px 14px; /* Μέγεθος κουμπιού */
+    width: 90px; /* Πλάτος κουμπιού */
+    border: none; /* Χωρίς περίγραμμα */
+    background-color: #04c74e; /* Πράσινο φόντο */
+    color: white; /* Λευκό κείμενο */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
+    cursor: pointer; /* Δείχνει ότι είναι clickable */
+    font-weight: bold; /* Έντονο κείμενο */
 }
 
 .like-button:hover {
-    background-color: #068313;
+    background-color: #068313; /* Πιο σκούρο πράσινο στο hover */
 }
 
 .team-box {
-    background-color: #1f2937;
-    padding: 20px;
-    border-radius: 12px;
+    background-color: #1f2937; /* Φόντο box ομάδας */
+    padding: 20px; /* Εσωτερικό κενό */
+    border-radius: 12px; /* Στρογγυλεμένες γωνίες */
 }
 
-/*το κουμπί explore στο banner*/
 .hero-button {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 22px;
-    background-color: #04c74e;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
+    display: inline-block; /* Συμπεριφέρεται σαν κουμπί */
+    margin-top: 25px; /* Απόσταση από το πάνω κείμενο */
+    padding: 12px 22px; /* Μέγεθος κουμπιού */
+    background-color: #04c74e; /* Πράσινο φόντο */
+    color: white; /* Λευκό κείμενο */
+    text-decoration: none; /* Χωρίς υπογράμμιση */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
+    font-weight: bold; /* Έντονο κείμενο */
 }
-
 
 .hero-button:hover {
-    background-color: #068313;
+    background-color: #068313; /* Πιο σκούρο πράσινο στο hover */
 }
 
-
 .section-intro {
-    margin-bottom: 25px;
-    color: #d1d5db;
+    margin-bottom: 25px; /* Απόσταση από το επόμενο στοιχείο */
+    color: #d1d5db; /* Γκρι χρώμα κειμένου */
 }
 
 .info-box {
-    background-color: #1f2937;
-    padding: 22px;
-    border-radius: 12px;
-    color: #e5e7eb;
-}
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+    background-color: #1f2937; /* Φόντο πληροφοριών */
+    padding: 22px; /* Εσωτερικό κενό */
+    border-radius: 12px; /* Στρογγυλεμένες γωνίες */
+    color: #e5e7eb; /* Χρώμα κειμένου */
 }
 
+.card img {
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος */
+    height: 200px; /* Σταθερό ύψος εικόνας */
+    object-fit: cover; /* Κρατά σωστές αναλογίες */
+}
 
 .card:hover {
-    transform: scale(1.03);
+    transform: scale(1.03); /* Μεγαλώνει λίγο η κάρτα στο hover */
 }
 
 .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος */
+    height: 200px; /* Σταθερό ύψος εικόνας */
+    object-fit: cover; /* Κρατά σωστές αναλογίες */
 }
+
 .logo img {
-    height: 62px;
-    width: auto;
-    object-fit: contain;
+    height: 62px; /* Ύψος λογότυπου */
+    width: auto; /* Αυτόματο πλάτος */
+    object-fit: contain; /* Δεν κόβει το logo */
 }
+
 .logo img {
-    height: 80px;
-    width: auto;
-    object-fit: contain;
+    height: 80px; /* Τελικό ύψος λογότυπου */
+    width: auto; /* Αυτόματο πλάτος */
+    object-fit: contain; /* Δεν κόβει το logo */
 }
 
 .slideshow-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 25px;
+    display: flex; /* Βάζει κουμπιά και slideshow σε σειρά */
+    align-items: center; /* Κάθετη ευθυγράμμιση */
+    justify-content: center; /* Κεντράρει το slideshow */
+    gap: 18px; /* Απόσταση ανάμεσα στα στοιχεία */
+    margin-top: 25px; /* Απόσταση από το πάνω περιεχόμενο */
 }
 
 .slideshow {
-    width: 100%;
-    max-width: 420px;
+    width: 100%; /* Πιάνει διαθέσιμο πλάτος */
+    max-width: 420px; /* Μέγιστο πλάτος slideshow */
 }
 
 .slide-card {
-    background-color: #1f2937;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    background-color: #1f2937; /* Φόντο κάρτας slideshow */
+    border-radius: 12px; /* Στρογγυλεμένες γωνίες */
+    overflow: hidden; /* Κρατά την εικόνα μέσα στην κάρτα */
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25); /* Σκιά */
 }
 
 .slide-card img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    cursor: pointer;
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος */
+    height: 260px; /* Ύψος εικόνας */
+    object-fit: cover; /* Κρατά σωστές αναλογίες */
+    cursor: pointer; /* Δείχνει ότι η εικόνα είναι clickable */
 }
 
 .slide-content {
-    padding: 18px;
-    text-align: center;
+    padding: 18px; /* Κενό μέσα στο slide */
+    text-align: center; /* Κεντράρει το κείμενο */
 }
 
 .slide-content h3 {
-    color: #fbfbf9;
-    margin-bottom: 10px;
+    color: #fbfbf9; /* Χρώμα τίτλου */
+    margin-bottom: 10px; /* Απόσταση από το κείμενο */
 }
 
 .slide-content p {
-    color: #d1d5db;
-    margin-bottom: 10px;
+    color: #d1d5db; /* Χρώμα παραγράφου */
+    margin-bottom: 10px; /* Απόσταση από το επόμενο στοιχείο */
 }
 
 .slide-btn {
-    background-color: #04c74e;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
+    background-color: #04c74e; /* Πράσινο φόντο */
+    color: white; /* Λευκό σύμβολο */
+    border: none; /* Χωρίς περίγραμμα */
+    border-radius: 50%; /* Κυκλικό κουμπί */
+    width: 42px; /* Πλάτος κουμπιού */
+    height: 42px; /* Ύψος κουμπιού */
+    font-size: 1.5rem; /* Μέγεθος συμβόλου */
+    cursor: pointer; /* Δείχνει ότι είναι clickable */
+    font-weight: bold; /* Έντονο σύμβολο */
 }
 
 .slide-btn:hover {
-    background-color: #068313;
+    background-color: #068313; /* Πιο σκούρο πράσινο στο hover */
 }
 
 .slide-card {
-    background-color: #1f2937;
-    border-radius: 14px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+    background-color: #1f2937; /* Φόντο κάρτας */
+    border-radius: 14px; /* Στρογγυλεμένες γωνίες */
+    overflow: hidden; /* Κρατά το περιεχόμενο μέσα στην κάρτα */
+    cursor: pointer; /* Δείχνει ότι η κάρτα είναι clickable */
+    transition: all 0.3s ease; /* Ομαλή αλλαγή στα animations */
+    max-width: 500px; /* Μέγιστο πλάτος κάρτας */
+    margin: 0 auto; /* Κεντράρει την κάρτα */
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3); /* Σκιά κάρτας */
 }
 
 .slide-card img {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος */
+    height: 280px; /* Τελικό ύψος εικόνας */
+    object-fit: cover; /* Κρατά σωστές αναλογίες */
 }
 
 .slide-content {
-    padding: 20px;
+    padding: 20px; /* Τελικό padding περιεχομένου */
 }
 
 .extra-details {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid #374151;
-    color: #d1d5db;
-    animation: fadeIn 0.3s ease;
+    margin-top: 15px; /* Απόσταση από το πάνω περιεχόμενο */
+    padding-top: 10px; /* Εσωτερικό κενό από πάνω */
+    border-top: 1px solid #374151; /* Διαχωριστική γραμμή */
+    color: #d1d5db; /* Χρώμα κειμένου */
+    animation: fadeIn 0.3s ease; /* Animation εμφάνισης */
 }
 
 .slide-card.expanded {
-    transform: scale(1.02);
+    transform: scale(1.02); /* Μεγαλώνει λίγο όταν ανοίγει */
 }
 
 @keyframes fadeIn {
     from {
-        opacity: 0;
-        transform: translateY(-5px);
+        opacity: 0; /* Ξεκινά αόρατο */
+        transform: translateY(-5px); /* Ξεκινά λίγο πιο πάνω */
     }
 
     to {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 1; /* Γίνεται ορατό */
+        transform: translateY(0); /* Επιστρέφει στη θέση του */
     }
 }
 
 .slideshow-hint {
-    text-align: center;
-    font-size: 0.9rem;
+    text-align: center; /* Κεντράρει την οδηγία */
+    font-size: 0.9rem; /* Μικρότερο μέγεθος κειμένου */
 }

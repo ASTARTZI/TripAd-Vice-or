@@ -2,73 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TripAd-Vice-or</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8"> <!-- Ορισμός χαρακτήρων -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive εμφάνιση -->
+
+    <title>TripAd-Vice-or</title> <!-- Τίτλος σελίδας -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Σύνδεση CSS -->
+
 </head>
 
 <body>
 
-    <header>
-        <div class="logo">
-            <a href="{{ url_for('home') }}">
+    <header> <!-- Επικεφαλίδα -->
+
+        <div class="logo"> <!-- Περιοχή λογότυπου -->
+
+            <a href="{{ url_for('home') }}"> <!-- Link για αρχική -->
+
                 <img src="{{ url_for('static', filename='images/logo.png') }}"
-                     alt="TripAd-Vice-or Logo">
+                     alt="TripAd-Vice-or Logo"> <!-- Εικόνα logo -->
+
             </a>
+
         </div>
 
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="{{ url_for('items') }}">Bad Habits</a>
+        <nav> <!-- Μενού πλοήγησης -->
+
+            <a href="{{ url_for('home') }}">Home</a> <!-- Link Home -->
+
+            <a href="{{ url_for('items') }}">Bad Habits</a> <!-- Link Bad Habits -->
+
         </nav>
+
     </header>
 
-    <main>
+    <main> <!-- Κύριο περιεχόμενο -->
 
-        <section class="hero">
-            <h1>TripAd-Vice-or</h1>
+        <section class="hero"> <!-- Hero section -->
 
-            <p>Wanna make some bad decisions?</p>
+            <h1>TripAd-Vice-or</h1> <!-- Κεντρικός τίτλος -->
+
+            <p>Wanna make some bad decisions?</p> <!-- Σύντομο slogan -->
 
             <a class="hero-button"
-               href="{{ url_for('items') }}">
+               href="{{ url_for('items') }}"> <!-- Κουμπί μετάβασης -->
+
                Explore Bad Habits
+
             </a>
+
         </section>
 
-        <section class="section">
+        <section class="section"> <!-- Ενότητα δημοφιλών habits -->
 
-            <h2>Top 5 Bad Habits</h2>
+            <h2>Top 5 Bad Habits</h2> <!-- Τίτλος ενότητας -->
 
             <p class="section-intro">
                  These are the most popular bad habits according to our users.
-            </p>
+            </p> <!-- Περιγραφή -->
 
             <p class="slideshow-hint">
                 Click on a card to view more details.
-            </p>
+            </p> <!-- Οδηγία χρήσης -->
 
-            <div class="slideshow-container">
+            <div class="slideshow-container"> <!-- Container slideshow -->
 
-                <button class="slide-btn" id="prev-slide">❮</button>
+                <button class="slide-btn" id="prev-slide">❮</button> <!-- Προηγούμενο slide -->
 
-                <div id="popular-container" class="slideshow"></div>
+                <div id="popular-container" class="slideshow"></div> <!-- Εδώ εμφανίζονται τα cards -->
 
-                <button class="slide-btn" id="next-slide">❯</button>
+                <button class="slide-btn" id="next-slide">❯</button> <!-- Επόμενο slide -->
 
             </div>
             
  
         </section>
 
-        <section class="section">
+        <section class="section"> <!-- Ενότητα πληροφοριών -->
 
-            <h2>About the Website</h2>
+            <h2>About the Website</h2> <!-- Τίτλος ενότητας -->
 
-            <div class="info-box">
+            <div class="info-box"> <!-- Box πληροφοριών -->
+
                 <p>
+
             TripAd-Vice-or is a humorous web application that presents
             a collection of bad habits in a playful and entertaining way.
             Users can browse through different bad habits, search for specific
@@ -81,26 +100,31 @@
             features, TripAd-Vice-or offers a lighthearted browsing experience
             while encouraging users to think twice before following a “bad idea”.
 
-                </p>
+                </p> <!-- Περιγραφή ιστοσελίδας -->
+
             </div>
 
         </section>
 
-        <section class="section">
+        <section class="section"> <!-- Ενότητα ομάδας -->
 
-            <h2>Our Team</h2>
+            <h2>Our Team</h2> <!-- Τίτλος ομάδας -->
 
-            <div class="team-box">
+            <div class="team-box"> <!-- Box μελών -->
 
                 <p>
+
                     <strong>Member 1:</strong>
                     Martha Astartzi – UI/UX Design & Frontend Integration
-                </p>
+
+                </p> <!-- Πρώτο μέλος -->
 
                 <p>
+
                     <strong>Member 2:</strong>
                     Maria Kasapi – Backend API, Testing & Presentation
-                </p>
+
+                </p> <!-- Δεύτερο μέλος -->
 
             </div>
 
@@ -108,11 +132,13 @@
 
     </main>
 
-    <footer>
-        <p>TripAd-Vice-or | Web Information Systems Project 2026 ©</p>
+    <footer> <!-- Footer -->
+
+        <p>TripAd-Vice-or | Web Information Systems Project 2026 ©</p> <!-- Κείμενο footer -->
+
     </footer>
 
-    <script src="{{ url_for('static', filename='items.js') }}"></script>
+    <script src="{{ url_for('static', filename='items.js') }}"></script> <!-- Σύνδεση JavaScript -->
 
 </body>
 

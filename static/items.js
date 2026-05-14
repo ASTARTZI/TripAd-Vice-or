@@ -1,16 +1,17 @@
+// Βασικό URL του Flask REST API
 const API_BASE_URL = "http://127.0.0.1:5000";
 
-// =========================
-// CREATE CARD
-// =========================
 
+// Δημιουργία των καρτών
+// Παίρνει ένα αντικείμενο item (από το MongoDB) και επιστρέφει δυναμικά html
 function createCard(item) {
 
     if (!item._id) {
         return "";
-    }
-
-    return `
+    } // Στην περίπτωση που υπάρχει invalid αντικείμενο, δλδ χωρίς id,δεν δημιουργείται κάρτα
+    
+    //δημιουργεί την κάρτα με την εικόνα το όνομα, την περιγραφή,την κατηγορία και το επίπεδο ρίσκου για την συνήθεια
+    return ` 
         <div class="card">
 
             <img
@@ -58,42 +59,57 @@ function createCard(item) {
         </div>
     `;
 }
+//Με το onclick ="likeItem('${item._id}')":
+//όταν ο χρήστης πατήσει στην εικόνα γίνεται POST request στο /like!!!
 
-// =========================
-// LOAD ITEMS
-// =========================
+//αν δεν υπάρχει κάποιο από τα χαρακτηριστικά εμφανίζουμε unknown ή not specified για να υπάρχει ομοιομορφία
 
+
+//***************************************************************
+
+//Η βασική function για αναζήτηση μιας κακής συνήθειας
 async function loadItems(searchTerm = "") {
 
     const container = document.getElementById("items-container");
+    //βρίσκει στο html το element που έχει id="items-container" και το βάζει στο container
 
+    //για να αποφευχθεί πρόβλημα σε περίπτωση που δεν υπάρχει το element στη σελίδα
     if (!container) {
         return;
     }
 
+    //παίρνουμε το dropdown categories απο το items.html
     const categoryFilter = document.getElementById("category-filter");
 
+    //αν υπάρχει το categoryFilter τότε το category παίρνει την τιμή του, αλλιώς είναι κενό
     const category = categoryFilter
         ? categoryFilter.value
         : "";
 
     try {
-
+        //Εμφανίζει loading state πριν ολοκληρωθεί το fetch
         container.innerHTML = "<p>Loading bad habits...</p>";
 
+        // Δημιουργία URL για το search endpoint
+        // με ασφαλές encoding
         let url =
             `${API_BASE_URL}/search?name=${encodeURIComponent(searchTerm)}`;
 
+        //Αν υπάρχει category, προστίθεται στο URL 
         if (category !== "") {
             url += `&category=${encodeURIComponent(category)}`;
         }
 
+        //GET request στο Flask API
         const response = await fetch(url);
 
+        //Μετατροπή JSON response σε JavaScript Array
         const items = await response.json();
 
+        //Καθαρίζει προηγούμενα αποτελέσματα
         container.innerHTML = "";
 
+        //Αν δεν βρέθηκαν αποτελέσματα εμφανίζει το παρακάτω
         if (!items || items.length === 0) {
 
             container.innerHTML =
@@ -102,11 +118,12 @@ async function loadItems(searchTerm = "") {
             return;
         }
 
+        //δημιουργία καρτών για όλα τα items
         container.innerHTML =
             items.map(createCard).join("");
 
     } catch (error) {
-
+        // Εμφάνιση error στο console
         console.error("Error loading items:", error);
 
         container.innerHTML =
@@ -114,14 +131,13 @@ async function loadItems(searchTerm = "") {
     }
 }
 
-// =========================
-// LIKE ITEM
-// =========================
-
+//***************************************************************
+//Βασική συνάρτηση για το like 
+//Κάνει like σε ένα bad habit
 async function likeItem(itemId) {
 
     try {
-
+        //POST request στο /like endpoint
         const response = await fetch(`${API_BASE_URL}/like`, {
 
             method: "POST",
@@ -130,13 +146,16 @@ async function likeItem(itemId) {
                 "Content-Type": "application/json"
             },
 
+            //Στέλνει το id του item σε μορφή JSON
             body: JSON.stringify({
                 id: itemId
             })
         });
 
+        //Παίρνει το updated item
         const updatedItem = await response.json();
 
+        //Αν υπάρχει error εμφανίζεται στο console
         if (updatedItem.error) {
 
             console.error(updatedItem.error);
@@ -144,9 +163,11 @@ async function likeItem(itemId) {
             return;
         }
 
+        //βρίσκει το span των likes
         const likesElement =
             document.getElementById(`likes-${itemId}`);
 
+        //Ενημερώνει δυναμικά τα likes χωρίς refresh!
         if (likesElement) {
             likesElement.textContent = updatedItem.likes;
         }
@@ -157,28 +178,32 @@ async function likeItem(itemId) {
     }
 }
 
-// =========================
-// SLIDESHOW VARIABLES
-// =========================
+//***************************************************************
 
+//το τρέχον slide
 let currentSlide = 0;
 
+//Array με τα popular items
 let popularItems = [];
 
+//Ελέγχει αν το slide είναι expanded
 let expandedSlide = false;
 
+//Αποθηκεύει το interval του slideshow
 let slideshowInterval = null;
 
+//κρατάει ποιο slide είναι locked
 let lockedSlideIndex = null;
 
-// =========================
-// START SLIDESHOW
-// =========================
+//***************************************************************
 
+//Ξεκινά το automatic slideshow
 function startSlideshow() {
 
+    //σταματάει προηγούμενο interval 
     stopSlideshow();
 
+    //αλλάζει slide κάθε 5 δευτερόλεπτα
     slideshowInterval = setInterval(() => {
 
         // Αν είναι ανοιχτές οι πληροφορίες,
@@ -187,21 +212,23 @@ function startSlideshow() {
             return;
         }
 
+        //Μεταβαίνει στο επόμενο slide
         currentSlide =
             (currentSlide + 1)
-            % popularItems.length;
+            % popularItems.length; //για να "γυρίζει" κυκλικά τα slides
 
+        //Εμφανίζει το νέο slide
         showSlide(currentSlide);
 
     }, 5000);
 }
 
-// =========================
-// STOP SLIDESHOW
-// =========================
+//***************************************************************
 
+//Σταματάει το sldeshow
 function stopSlideshow() {
 
+    //Αν υπάρχει ενεργό interval
     if (slideshowInterval !== null) {
 
         clearInterval(slideshowInterval);
@@ -210,31 +237,36 @@ function stopSlideshow() {
     }
 }
 
-// =========================
-// LOAD POPULAR ITEMS
-// =========================
+//***************************************************************
 
+//Φορτώνει τα τοπ 5 popular items
 async function loadPopularItems() {
 
+    //Παίρνει το slideshow container
     const container =
         document.getElementById("popular-container");
 
+    //Αν δεν υπάρχει το container σταματάει η function
     if (!container) {
         return;
     }
 
     try {
 
+        //Μήνυμα Loading
         container.innerHTML =
             "<p>Loading popular bad habits...</p>";
 
+        //GET request στο /popular endpoint
         const response =
             await fetch(`${API_BASE_URL}/popular`);
 
+        //Μετατροπή του response σε array
         popularItems = await response.json();
 
         container.innerHTML = "";
 
+        //Αν δεν υπάρχουν τέτοια items 
         if (!popularItems || popularItems.length === 0) {
 
             container.innerHTML =
@@ -243,6 +275,7 @@ async function loadPopularItems() {
             return;
         }
 
+        //Reset slideshow variables
         currentSlide = 0;
 
         expandedSlide = false;
@@ -307,23 +340,20 @@ async function loadPopularItems() {
     }
 }
 
-// =========================
-// SHOW SLIDE
-// =========================
+//***************************************************************
 
+//Εμφανίζει ένα συγκεκριμένο slide
 function showSlide(index) {
 
     const container =
         document.getElementById("popular-container");
 
+    //Αν δεν υπάρχει container ή items
     if (!container || popularItems.length === 0) {
         return;
     }
 
-    // =========================
-    // LOCK SLIDE WHEN EXPANDED
-    // =========================
-
+    //Aν το slide είναι expanded, δεν επιτρέπεται η αλλαγή slide!
     if (
         expandedSlide &&
         lockedSlideIndex !== null &&
@@ -335,8 +365,10 @@ function showSlide(index) {
         return;
     }
 
+    //Παίρνει το item του current slide
     const item = popularItems[index];
 
+    //Δημιουργεί δυναμικά το slide
     container.innerHTML = `
 
         <div
@@ -401,50 +433,49 @@ function showSlide(index) {
     `;
 }
 
-// =========================
-// TOGGLE SLIDE DETAILS
-// =========================
+//***************************************************************
 
+//Ανοίγει η κλείνει τις εξτρα πληροφορίες
 function toggleSlideDetails() {
 
     expandedSlide = !expandedSlide;
 
-    // =========================
-    // OPEN DETAILS
-    // =========================
+    //Ανοίγμα πληροφοριών
 
+    //Αν ανοίξουν οι πληροφορίες
     if (expandedSlide) {
-
+        //κλειδώνει το τρέχον slide 
         lockedSlideIndex = currentSlide;
 
+        //σταματά το αυτόματο slideshow
         stopSlideshow();
 
     } else {
 
-        // =========================
-        // CLOSE DETAILS
-        // =========================
+        //Κλείσιμο πληροφοριών 
 
+        //Επιστρέφει στο locked slide 
         currentSlide = lockedSlideIndex;
 
         lockedSlideIndex = null;
 
         showSlide(currentSlide);
 
+        //Ξαναξεκινά το slideshow
         startSlideshow();
 
         return;
     }
-
+    //ενημερώνει το slide
     showSlide(currentSlide);
 }
 
-// =========================
-// DOM LOADED
-// =========================
+//***************************************************************
 
+//Εκτελείται όταν φορτωσει πλήρως το HTML
 document.addEventListener("DOMContentLoaded", () => {
 
+    //Παίρνει τα στοιχεία του search
     const searchButton =
         document.getElementById("search-button");
 
@@ -454,19 +485,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoryFilter =
         document.getElementById("category-filter");
 
-    // =========================
-    // ITEMS PAGE
-    // =========================
+    //Items page
 
+    //Αν υπάρχουν τα στοιχεία search
     if (searchButton && searchInput) {
-
+        //φορτώνει αρχικά όλα τα items
         loadItems();
 
+        //Search button click
         searchButton.addEventListener("click", () => {
 
             loadItems(searchInput.value);
         });
 
+        //search με enter key
         searchInput.addEventListener("keyup", (event) => {
 
             if (event.key === "Enter") {
@@ -475,6 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        //Filter ανά category
         if (categoryFilter) {
 
             categoryFilter.addEventListener("change", () => {
@@ -484,9 +517,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // =========================
-    // HOMEPAGE SLIDESHOW
-    // =========================
+    //homepage slideshow
 
+    //φορτώνει τα popular items
     loadPopularItems();
 });

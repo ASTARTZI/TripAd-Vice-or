@@ -9,7 +9,7 @@ function createCard(item) {
     if (!item._id) {
         return "";
     } // Στην περίπτωση που υπάρχει invalid αντικείμενο, δλδ χωρίς id,δεν δημιουργείται κάρτα
-    
+
     //δημιουργεί την κάρτα με την εικόνα το όνομα, την περιγραφή,την κατηγορία και το επίπεδο ρίσκου για την συνήθεια
     return ` 
         <div class="card">
@@ -472,6 +472,206 @@ function toggleSlideDetails() {
 
 //***************************************************************
 
+// Τρέχον slide για το slideshow "More Bad Habits"
+let currentMoreSlide = 0;
+
+// Πόσα bad habits εμφανίζονται κάθε φορά στο δεύτερο slideshow
+const moreItemsPerSlide = 6;
+
+// Array με όλα τα bad habits από το MongoDB για το δεύτερο slideshow
+let moreItems = [];
+
+//***************************************************************
+
+// Φορτώνει όλα τα bad habits για το slideshow "More Bad Habits"
+async function loadMoreBadHabits() {
+
+    // Παίρνει το container του δεύτερου slideshow
+    const container =
+        document.getElementById("more-habits-container");
+
+    // Αν δεν υπάρχει το container, σταματάει η function
+    // Έτσι δεν επηρεάζεται η σελίδα Bad Habits
+    if (!container) {
+        return;
+    }
+
+    try {
+
+        // Εμφανίζει loading μήνυμα μέχρι να έρθουν τα δεδομένα
+        container.innerHTML =
+            "<p>Loading more bad habits...</p>";
+
+        // GET request στο /search endpoint,
+        // το οποίο παίρνει τα δεδομένα από το MongoDB
+        const response =
+            await fetch(`${API_BASE_URL}/search`);
+
+        // Μετατροπή του response σε array
+        moreItems =
+            await response.json();
+
+        // Αν δεν υπάρχουν bad habits
+        if (!moreItems || moreItems.length === 0) {
+
+            container.innerHTML =
+                "<p>No bad habits found.</p>";
+
+            return;
+        }
+
+        // Reset στο πρώτο group
+        currentMoreSlide = 0;
+
+        // Εμφάνιση πρώτης ομάδας
+        showMoreBadHabitsSlide();
+
+        // Κουμπί προηγούμενης ομάδας
+        const prevMoreButton =
+            document.getElementById("prev-more-slide");
+
+        // Κουμπί επόμενης ομάδας
+        const nextMoreButton =
+            document.getElementById("next-more-slide");
+
+        // Event για προηγούμενη ομάδα
+        if (prevMoreButton) {
+
+            prevMoreButton.onclick = () => {
+
+                previousMoreBadHabitsSlide();
+
+            };
+        }
+
+        // Event για επόμενη ομάδα
+        if (nextMoreButton) {
+
+            nextMoreButton.onclick = () => {
+
+                nextMoreBadHabitsSlide();
+
+            };
+        }
+
+    } catch (error) {
+
+        // Εμφάνιση σφάλματος στην κονσόλα
+        console.error(
+            "Error loading more bad habits:",
+            error
+        );
+
+        container.innerHTML =
+            "<p>Error loading more bad habits.</p>";
+    }
+}
+
+//***************************************************************
+
+// Εμφανίζει την τρέχουσα ομάδα bad habits στο δεύτερο slideshow
+function showMoreBadHabitsSlide() {
+
+    const container =
+        document.getElementById("more-habits-container");
+
+    // Αν δεν υπάρχει container ή δεν υπάρχουν δεδομένα, σταματάει
+    if (!container || moreItems.length === 0) {
+        return;
+    }
+
+    // Καθαρίζει το προηγούμενο περιεχόμενο
+    container.innerHTML = "";
+
+    // Υπολογίζει από ποιο item ξεκινάει η τρέχουσα ομάδα
+    const startIndex =
+        currentMoreSlide * moreItemsPerSlide;
+
+    // Υπολογίζει σε ποιο item τελειώνει η τρέχουσα ομάδα
+    const endIndex =
+        startIndex + moreItemsPerSlide;
+
+    // Παίρνει μέχρι 6 items για εμφάνιση
+    const visibleItems =
+        moreItems.slice(startIndex, endIndex);
+
+    // Δημιουργεί τις μικρές κάρτες
+    visibleItems.forEach((item) => {
+
+        // Αν υπάρχει invalid αντικείμενο χωρίς id, δεν το εμφανίζει
+        if (!item._id) {
+            return;
+        }
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "more-habit-card";
+
+        // Εμφανίζει μόνο εικόνα και τίτλο, χωρίς description/details
+        card.innerHTML = `
+
+            <img
+                src="${item.image}"
+                alt="${item.name}"
+            >
+
+            <h3>${item.name}</h3>
+
+        `;
+
+        // Με click πηγαίνει στη σελίδα Bad Habits
+        card.addEventListener("click", () => {
+
+            window.location.href = "/items";
+
+        });
+
+        // Προσθέτει την κάρτα στο container
+        container.appendChild(card);
+
+    });
+}
+
+//***************************************************************
+
+// Πηγαίνει στην προηγούμενη ομάδα bad habits
+function previousMoreBadHabitsSlide() {
+
+    const totalSlides =
+        Math.ceil(moreItems.length / moreItemsPerSlide);
+
+    if (totalSlides === 0) {
+        return;
+    }
+
+    currentMoreSlide =
+        (currentMoreSlide - 1 + totalSlides) % totalSlides;
+
+    showMoreBadHabitsSlide();
+}
+
+//***************************************************************
+
+// Πηγαίνει στην επόμενη ομάδα bad habits
+function nextMoreBadHabitsSlide() {
+
+    const totalSlides =
+        Math.ceil(moreItems.length / moreItemsPerSlide);
+
+    if (totalSlides === 0) {
+        return;
+    }
+
+    currentMoreSlide =
+        (currentMoreSlide + 1) % totalSlides;
+
+    showMoreBadHabitsSlide();
+}
+
+//***************************************************************
+
 //Εκτελείται όταν φορτωσει πλήρως το HTML
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -521,4 +721,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //φορτώνει τα popular items
     loadPopularItems();
+
+    //φορτώνει το νέο slideshow "More Bad Habits"
+    //χωρίς autoplay και χωρίς επιπλέον details
+    loadMoreBadHabits();
 });

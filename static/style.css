@@ -343,3 +343,77 @@ footer {
     text-align: center; /* Κεντράρει την οδηγία */
     font-size: 0.9rem; /* Μικρότερο μέγεθος κειμένου */
 }
+
+/* Container για το νέο slideshow της αρχικής σελίδας */
+.more-slideshow-container {
+    display: flex; /* Βάζει τα βελάκια και τα cards στην ίδια γραμμή */
+    align-items: center; /* Κάθετη ευθυγράμμιση */
+    justify-content: center; /* Κεντράρει το slideshow */
+    gap: 18px; /* Απόσταση ανάμεσα στα βελάκια και στα cards */
+    margin-top: 25px; /* Απόσταση από την περιγραφή */
+}
+
+/* Περιοχή που περιέχει τα 6 bad habits του νέου slideshow */
+.more-slideshow {
+    width: 100%; /* Πιάνει όλο το διαθέσιμο πλάτος */
+    display: grid; /* Εμφάνιση των habits σε grid */
+    grid-template-columns: repeat(6, 1fr); /* 6 habits στην ίδια σειρά */
+    gap: 18px; /* Απόσταση ανάμεσα στις κάρτες */
+}
+
+/* Μικρή κάρτα για κάθε bad habit στο νέο slideshow */
+.more-habit-card {
+    background-color: #1f2937; /* Ίδιο σκούρο φόντο με τις υπόλοιπες κάρτες */
+    border-radius: 12px; /* Στρογγυλεμένες γωνίες */
+    overflow: hidden; /* Κρατά την εικόνα μέσα στην κάρτα */
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25); /* Σκιά κάρτας */
+    cursor: pointer; /* Δείχνει ότι η κάρτα είναι clickable */
+    transition: transform 0.3s ease; /* Ομαλή κίνηση στο hover */
+}
+
+/* Hover effect για τις μικρές κάρτες */
+.more-habit-card:hover {
+    transform: scale(1.03); /* Μεγαλώνει λίγο η κάρτα στο hover */
+}
+
+/* Εικόνα κάθε bad habit στο νέο slideshow */
+.more-habit-card img {
+    width: 100%; /* Η εικόνα πιάνει όλο το πλάτος της κάρτας */
+    height: 150px; /* Σταθερό ύψος εικόνας */
+    object-fit: cover; /* Κόβει σωστά την εικόνα χωρίς παραμόρφωση */
+}
+
+/* Τίτλος κάθε bad habit στο νέο slideshow */
+.more-habit-card h3 {
+    padding: 12px; /* Εσωτερικό κενό γύρω από τον τίτλο */
+    text-align: center; /* Κεντράρει τον τίτλο */
+    color: #fbfbf9; /* Ανοιχτό χρώμα τίτλου */
+    font-size: 1rem; /* Μέγεθος τίτλου */
+}
+
+/* Responsive εμφάνιση για tablets */
+@media (max-width: 1000px) {
+    .more-slideshow {
+        grid-template-columns: repeat(3, 1fr); /* 3 habits ανά σειρά σε μικρότερες οθόνες */
+    }
+}
+
+/* Responsive εμφάνιση για κινητά */
+@media (max-width: 600px) {
+    .more-slideshow-container {
+        gap: 8px; /* Μικρότερη απόσταση στα κινητά */
+    }
+
+    .more-slideshow {
+        grid-template-columns: repeat(2, 1fr); /* 2 habits ανά σειρά στα κινητά */
+        gap: 12px; /* Μικρότερη απόσταση ανάμεσα στις κάρτες */
+    }
+
+    .more-habit-card img {
+        height: 120px; /* Μικρότερο ύψος εικόνας στα κινητά */
+    }
+
+    .more-habit-card h3 {
+        font-size: 0.9rem; /* Μικρότερος τίτλος στα κινητά */
+    }
+}

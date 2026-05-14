@@ -1,0 +1,247 @@
+[
+{
+"name":"Smoking",
+"image":"https://images.unsplash.com/photo-1504711434969-e33886168f5c",
+"description":"A classic bad idea with long-term health risks.",
+"likes":15,
+"category":"Addiction",
+"risk_level":"High",
+"side_effects":"Cancer, heart disease, addiction"
+},
+{
+"name":"Energy Drinks Overdose",
+"image":"https://images.unsplash.com/photo-1544145945-f90425340c7e",
+"description":"Too much caffeine can go very wrong.",
+"likes":9,
+"category":"Substance",
+"risk_level":"Medium",
+"side_effects":"Insomnia, anxiety, heart palpitations"
+},
+{
+"name":"Texting While Driving",
+"image":"https://images.unsplash.com/photo-1517841905240-472988babdf9",
+"description":"Terrible multitasking choice.",
+"likes":22,
+"category":"Dangerous Behavior",
+"risk_level":"High",
+"side_effects":"Accidents, injury"
+},
+{
+"name":"Eating Only Junk Food",
+"image":"https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+"description":"Sounds fun until your body disagrees.",
+"likes":7,
+"category":"Lifestyle",
+"risk_level":"Medium",
+"side_effects":"Obesity, diabetes"
+},
+{
+"name":"Skipping Sleep",
+"image":"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+"description":"A bad habit disguised as productivity.",
+"likes":18,
+"category":"Lifestyle",
+"risk_level":"Medium",
+"side_effects":"Fatigue, memory issues"
+},
+{
+  "name": "Skipping Breakfast",
+  "image": "https://images.unsplash.com/photo-1506089676908-3592f7389d4d",
+  "description": "Starting your day without eating anything.",
+  "likes": 5,
+  "category": "Health",
+  "risk_level": "Medium",
+  "side_effects": "Low energy, poor concentration"
+},
+{
+  "name": "All-Nighter Studying",
+  "image": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4",
+  "description": "Studying all night before an exam.",
+  "likes": 12,
+  "category": "Student Life",
+  "risk_level": "High",
+  "side_effects": "Exhaustion, memory issues"
+},
+{
+  "name": "Procrastination",
+  "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+  "description": "Delaying tasks until the last moment.",
+  "likes": 20,
+  "category": "Productivity",
+  "risk_level": "High",
+  "side_effects": "Stress, missed deadlines"
+},
+{
+  "name": "Oversleeping",
+  "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+  "description": "Sleeping too much and missing responsibilities.",
+  "likes": 7,
+  "category": "Sleep",
+  "risk_level": "Medium",
+  "side_effects": "Laziness, headaches"
+},
+{
+  "name": "Social Media Addiction",
+  "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+  "description": "Spending hours daily on social media.",
+  "likes": 14,
+  "category": "Technology",
+  "risk_level": "High",
+  "side_effects": "Anxiety, time waste"
+},
+{
+  "name": "Not Drinking Water",
+  "image": "https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg",
+  "description": "Ignoring hydration throughout the day.",
+  "likes": 6,
+  "category": "Health",
+  "risk_level": "Medium",
+  "side_effects": "Dehydration, headaches"
+},
+{
+  "name": "Impulse Shopping",
+  "image": "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg",
+  "description": "Buying things you don't need.",
+  "likes": 11,
+  "category": "Money",
+  "risk_level": "Medium",
+  "side_effects": "Debt, regret"
+},
+{
+  "name": "Skipping Exercise",
+  "image": "https://images.unsplash.com/photo-1518611012118-696072aa579a",
+  "description": "Avoiding physical activity completely.",
+  "likes": 13,
+  "category": "Health",
+  "risk_level": "High",
+  "side_effects": "Weight gain, low energy"
+},
+{
+  "name": "Sleeping with Phone",
+  "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5",
+  "description": "Using your phone right before sleep.",
+  "likes": 10,
+  "category": "Sleep",
+  "risk_level": "Medium",
+  "side_effects": "Insomnia, eye strain"
+},
+{
+  "name": "Binge Watching",
+  "image": "https://images.unsplash.com/photo-1497032628192-86f99bcd76bc",
+  "description": "Watching multiple episodes non-stop.",
+  "likes": 18,
+  "category": "Entertainment",
+  "risk_level": "Medium",
+  "side_effects": "Time loss, poor sleep"
+},
+{
+  "name": "Stress Eating",
+  "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19",
+  "description": "Eating due to stress rather than hunger.",
+  "likes": 9,
+  "category": "Food",
+  "risk_level": "High",
+  "side_effects": "Weight gain, emotional issues"
+},
+{
+  "name": "Ignoring Deadlines",
+  "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe",
+  "description": "Not taking deadlines seriously.",
+  "likes": 16,
+  "category": "Productivity",
+  "risk_level": "High",
+  "side_effects": "Failure, stress"
+},
+{
+  "name": "Gaming All Night",
+  "image": "https://images.unsplash.com/photo-1511512578047-dfb367046420",
+  "description": "Playing video games all night instead of sleeping.",
+  "likes": 17,
+  "category": "Entertainment",
+  "risk_level": "Medium",
+  "side_effects": "Fatigue, poor performance"
+},
+{
+  "name": "Overusing Painkillers",
+  "image": "https://weillcornell.org/sites/default/files/styles/custom__1440x960_/public/news_images/shutterstock_1756011149.jpg?",
+  "description": "Taking medication without proper need.",
+  "likes": 6,
+  "category": "Health",
+  "risk_level": "High",
+  "side_effects": "Organ damage, addiction"
+},
+{
+  "name": "Eating Late at Night",
+  "image": "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg",
+  "description": "Heavy meals right before going to sleep.",
+  "likes": 11,
+  "category": "Food",
+  "risk_level": "Medium",
+  "side_effects": "Weight gain, poor digestion"
+},
+{
+  "name": "Ignoring Personal Hygiene",
+  "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952",
+  "description": "Not maintaining basic cleanliness routines.",
+  "likes": 4,
+  "category": "Lifestyle",
+  "risk_level": "Medium",
+  "side_effects": "Health issues, social discomfort"
+},
+{
+  "name": "Constant Multitasking",
+  "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7",
+  "description": "Trying to do too many things at once.",
+  "likes": 9,
+  "category": "Productivity",
+  "risk_level": "Medium",
+  "side_effects": "Reduced efficiency, stress"
+},
+{
+  "name": "Not Taking Breaks",
+  "image": "https://images.unsplash.com/photo-1492724441997-5dc865305da7",
+  "description": "Working continuously without rest.",
+  "likes": 13,
+  "category": "Work",
+  "risk_level": "High",
+  "side_effects": "Burnout, fatigue"
+},
+{
+  "name": "Overthinking Everything",
+  "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+  "description": "Spending too much time analyzing every detail.",
+  "likes": 15,
+  "category": "Mental Health",
+  "risk_level": "Medium",
+  "side_effects": "Anxiety, stress"
+},
+{
+  "name": "Using Phone While Eating",
+  "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2",
+  "description": "Being distracted during meals by your phone.",
+  "likes": 7,
+  "category": "Lifestyle",
+  "risk_level": "Low",
+  "side_effects": "Poor digestion, distraction"
+},
+{
+  "name": "Caffeine Before Bed",
+  "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93",
+  "description": "Drinking coffee or energy drinks at night.",
+  "likes": 10,
+  "category": "Sleep",
+  "risk_level": "Medium",
+  "side_effects": "Insomnia, restlessness"
+},
+{
+  "name": "Avoiding Responsibilities",
+  "image": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe",
+  "description": "Ignoring tasks and hoping they disappear.",
+  "likes": 14,
+  "category": "Productivity",
+  "risk_level": "High",
+  "side_effects": "Stress, failure"
+}
+]
+
+

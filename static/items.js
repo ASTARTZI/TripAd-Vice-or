@@ -220,7 +220,7 @@ function startSlideshow() {
         //Εμφανίζει το νέο slide
         showSlide(currentSlide);
 
-    }, 5000);
+    }, 3000);
 }
 
 //***************************************************************
@@ -275,45 +275,58 @@ async function loadPopularItems() {
             return;
         }
 
-        //Reset slideshow variables
+        //Αρχικοποιήση slideshow variables
         currentSlide = 0;
 
         expandedSlide = false;
 
         lockedSlideIndex = null;
 
+        //Εμφανίζει το 1ο slide
         showSlide(currentSlide);
 
+        //Ξεκινάει το automatic slideshow
         startSlideshow();
 
+        //Παίρνει τα navigation buttons
         const prevButton =
             document.getElementById("prev-slide");
 
         const nextButton =
             document.getElementById("next-slide");
 
+        //κουμπί για προηγούμενο
         if (prevButton) {
 
             prevButton.onclick = () => {
 
+                // Κλείνει expanded πληροφορίες
                 expandedSlide = false;
 
                 lockedSlideIndex = null;
 
+                // Μεταβαίνει στο προηγούμενο slide
+                // και αν είναι στο πρώτο
+                // πηγαίνει στο τελευταίο
                 currentSlide =
                     (currentSlide - 1 + popularItems.length)
                     % popularItems.length;
 
+                // Εμφανίζει το νέο slide
                 showSlide(currentSlide);
 
+                // Επανεκκινεί το slideshow
                 startSlideshow();
             };
         }
 
+        //Κουμπί για επόμενο
         if (nextButton) {
 
+             
             nextButton.onclick = () => {
 
+                // Κλείνει expanded πληροφορίες
                 expandedSlide = false;
 
                 lockedSlideIndex = null;
@@ -324,17 +337,20 @@ async function loadPopularItems() {
 
                 showSlide(currentSlide);
 
+                // Επανεκκινεί το slideshow
                 startSlideshow();
             };
         }
 
     } catch (error) {
 
+         // Εμφανίζει το error στο console
         console.error(
             "Error loading popular items:",
             error
         );
 
+        // Μήνυμα αποτυχίας στον χρήστη
         container.innerHTML =
             "<p>Error loading popular items.</p>";
     }
